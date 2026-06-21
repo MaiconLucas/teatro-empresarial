@@ -236,19 +236,62 @@ button {
   font-weight: 800;
 }
 
-.trust-logos {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
+.trust-carousel {
+  position: relative;
+  overflow: hidden;
+  padding: 2px 0;
 }
 
-.trust-logos img {
-  width: 100%;
+.trust-carousel::before,
+.trust-carousel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 62px;
+  pointer-events: none;
+}
+
+.trust-carousel::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--blue-ink), rgba(12, 36, 51, 0));
+}
+
+.trust-carousel::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--blue-ink), rgba(12, 36, 51, 0));
+}
+
+.trust-track {
+  display: flex;
+  width: max-content;
+  gap: 14px;
+  animation: trust-marquee 34s linear infinite;
+}
+
+.trust-track:hover {
+  animation-play-state: paused;
+}
+
+.trust-track img {
+  flex: 0 0 248px;
+  width: 248px;
   height: 64px;
   padding: 12px;
   object-fit: contain;
   background: #fff;
   border-radius: var(--radius);
+}
+
+@keyframes trust-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 7px));
+  }
 }
 
 .decision-strip {
@@ -761,14 +804,33 @@ button {
     background: linear-gradient(0deg, rgba(7, 18, 26, 0.94), rgba(7, 18, 26, 0.4));
   }
 
-  .trust-logos,
   .logo-grid,
   .gallery-grid,
   .trajectory-grid {
     grid-template-columns: 1fr;
   }
 
-  .trust-logos img {
+  .trust-strip {
+    gap: 14px;
+  }
+
+  .trust-strip p {
+    max-width: 310px;
+  }
+
+  .trust-carousel::before,
+  .trust-carousel::after {
+    width: 38px;
+  }
+
+  .trust-track {
+    gap: 12px;
+    animation-duration: 28s;
+  }
+
+  .trust-track img {
+    flex-basis: min(84vw, 320px);
+    width: min(84vw, 320px);
     height: 82px;
   }
 
@@ -805,5 +867,11 @@ button {
     left: auto;
     min-height: 42px;
     padding: 10px 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-track {
+    animation-duration: 80s;
   }
 }
