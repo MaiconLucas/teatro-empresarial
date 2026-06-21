@@ -267,7 +267,7 @@ button {
   display: flex;
   width: max-content;
   gap: 14px;
-  animation: trust-marquee 34s linear infinite;
+  animation: trust-marquee 58s linear infinite;
 }
 
 .trust-track:hover {
@@ -825,7 +825,7 @@ button {
 
   .trust-track {
     gap: 12px;
-    animation-duration: 28s;
+    animation-duration: 48s;
   }
 
   .trust-track img {
